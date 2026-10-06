@@ -1,0 +1,58 @@
+# PathMaid Landing
+
+Standalone static landing page for PathMaid distribution. It has Russian (`/`) and English (`/en/`) pages, one shared stylesheet and script, and no build step or npm dependencies. Artwork lives in `assets/`; replace files there when final illustrations are ready.
+
+Open `index.html` directly, or serve the folder with any static host.
+
+## Hosting
+
+Connect `kirylyaskou/PathMaid_landing` to your static hosting provider, select the `main` branch, and publish the repository root (`.`). Leave the build command empty: the site is already plain HTML, CSS, and JavaScript.
+
+The public routes are `/`, `/en/`, and `/auth-confirmed/`. No SPA rewrite is needed.
+
+## Release Links
+
+Download buttons resolve assets from the latest GitHub release at runtime. If the GitHub API is temporarily unavailable, buttons fall back to the latest release page.
+
+Supported downloads: Windows, macOS, Linux, and Android ARM64 APK (manual installation). HTML links also lead to the release page when JavaScript is unavailable.
+
+## Production Domain and Search
+
+The canonical Russian URL is `https://www.pathmaid.site/`; the English URL is `https://www.pathmaid.site/en/`. The domain `pathmaid.site` is registered with hoster.by; `www` is a subdomain and does not require a separate purchase.
+
+1. Add `www.pathmaid.site` as a custom domain in the hosting provider's settings.
+2. At the DNS provider, configure the records supplied by that host. Replace the previous GitHub Pages records if moving to another provider, and configure `pathmaid.site` to redirect to `www.pathmaid.site`.
+3. Enable HTTPS and verify the homepage, `/en/`, `/robots.txt`, `/sitemap.xml`, and the apex-to-www redirect.
+4. Verify a `pathmaid.site` domain property in Google Search Console using its DNS TXT record. Submit `https://www.pathmaid.site/sitemap.xml`, inspect both page URLs, and request indexing.
+5. Verify `/auth-confirmed/` and any authentication redirect configuration when switching domains. Keep its existing `noindex` directive; it is intentionally excluded from the sitemap and remains crawlable so search engines can see `noindex`.
+
+Publish the repository root unchanged, including `robots.txt` and `sitemap.xml`. The sitemap lists both public language pages. Each has its own canonical URL and reciprocal `hreflang` links; section anchors are not separate pages. Update the sitemap when adding public pages. Search Console reports indexing progress; neither a sitemap nor a request guarantees indexing or ranking for a query.
+
+References: [GitHub custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site), [Google sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).
+
+## Asset Sizes
+
+Use these generation targets:
+
+| File | Size | Use |
+| --- | ---: | --- |
+| `pathmaid-icon-128.png` | 128 x 128 | Current app icon used as favicon. |
+| `hero-character.png` | 1106 x 1422 current, target 1080 x 1320+ | Main mascot art for the first screen. Current file is wired into the hero. |
+| `intro-tilta-mage.png` | 1448 x 1086 | Tilta and the wizard in the introduction section. |
+| `cloud-sync-guide.png` | 1254 x 1254 current, target 1200 x 1200+ | Cloud sync section art. Current file is wired into the page. |
+| `pricing-tilta.png` | 1122 x 1402 | Artwork for the free pricing section. |
+| `community-swamp.png` | 1448 x 1086 | Artwork for the community backlog section. |
+| `feature-wide.png` | 1774 x 887 current, target 2:1 | Social sharing preview image. |
+| `auth-confirmed-success.png` | 1448 x 1086 current | Email confirmation success page background. |
+| `reference-bestiary.png`, `reference-spells.png`, `reference-items.png`, `reference-hazards.png` | About 1520 x 876 each | Switchable reference UI screenshots. |
+| `reference-reaction.png` | 1254 x 1254 | The two foreground characters framing the reference UI. |
+| `combat-ui.png` | 1644 x 1004 | Combat tracker UI revealed between shatter transitions. |
+| `combat-meme.png` | 1617 x 973 | Foreground meme that breaks apart and reassembles over the combat UI. |
+| `service-card-pathbuilder.png` | 1448 x 1086 current, target 720 x 500+ | Tilta in the Pathbuilder delivery van. |
+| `monster-ui.png` | 1613 x 1041 | Custom creature editor screenshot. |
+| `service-card-custom.png` | 1448 x 1086 | Tilta in front of the creature editor. |
+| `campaign-ui.png` | 1615 x 1042 | Campaign document graph screenshot. |
+| `service-card-campaign.png` | 1432 x 1098 | Tilta pointing at the campaign graph. |
+| `og-image.png` | 1200 x 630 | Future social sharing image. Not wired yet. |
+
+The remaining illustrations stay wired into the light design as temporary assets. Keep their filenames when replacing them with final artwork so both language pages update together.
