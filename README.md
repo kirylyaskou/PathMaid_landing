@@ -12,9 +12,9 @@ The public routes are `/`, `/en/`, and `/auth-confirmed/`. No SPA rewrite is nee
 
 ## Release Links
 
-Download buttons resolve assets from the latest GitHub release at runtime. If the GitHub API is temporarily unavailable, buttons fall back to the latest release page.
+Download buttons point directly to stable asset names under `https://github.com/kirylyaskou/PathMaid_releases/releases/latest/download/`. Each published release includes `PathMaid_windows_x64-setup.exe`, `PathMaid_macos_aarch64.dmg`, `PathMaid_linux_amd64.AppImage`, and `PathMaid_android_arm64.apk`. GitHub resolves these links to the latest published release, so the site does not need a version bump for each release.
 
-Supported downloads: Windows, macOS, Linux, and Android ARM64 APK (manual installation). HTML links also lead to the release page when JavaScript is unavailable.
+Supported downloads: Windows, macOS, Linux, and Android ARM64 APK (manual installation). Each button downloads its platform installer directly, including when JavaScript is unavailable.
 
 ## Production Domain and Search
 

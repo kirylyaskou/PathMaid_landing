@@ -1,29 +1,3 @@
-    const RELEASE_API_URL = 'https://api.github.com/repos/kirylyaskou/PathMaid_releases/releases/latest';
-    const RELEASE_PAGE_URL = 'https://github.com/kirylyaskou/PathMaid_releases/releases/latest';
-    const DOWNLOAD_ASSETS = {
-      windows: name => /_x64-setup\.exe$/i.test(name) || /_x64_en-US\.msi$/i.test(name),
-      macos: name => /\.dmg$/i.test(name),
-      linux: name => /\.AppImage$/i.test(name),
-      android: name => /_android_arm64\.apk$/i.test(name)
-    };
-
-    async function applyDownloads() {
-      try {
-        const response = await fetch(RELEASE_API_URL, { headers: { Accept: 'application/vnd.github+json' } });
-        if (!response.ok) return;
-        const release = await response.json();
-        const assets = Array.isArray(release.assets) ? release.assets : [];
-        document.querySelectorAll('[data-download]').forEach(link => {
-          const match = DOWNLOAD_ASSETS[link.dataset.download];
-          const asset = assets.find(candidate => match(candidate.name ?? ''));
-          link.href = asset?.browser_download_url ?? RELEASE_PAGE_URL;
-        });
-      } catch {
-        // Static links already point to the latest release page.
-      }
-    }
-    applyDownloads();
-
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const combatShowcase = document.querySelector('[data-combat-showcase]');
     if (combatShowcase) {
