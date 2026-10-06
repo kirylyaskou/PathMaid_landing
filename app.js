@@ -1,5 +1,5 @@
-    const RELEASE_API_URL = 'https://api.github.com/repos/kirylyaskou/PathMaid/releases/latest';
-    const RELEASE_PAGE_URL = 'https://github.com/kirylyaskou/PathMaid/releases/latest';
+    const RELEASE_API_URL = 'https://api.github.com/repos/kirylyaskou/PathMaid_releases/releases/latest';
+    const RELEASE_PAGE_URL = 'https://github.com/kirylyaskou/PathMaid_releases/releases/latest';
     const DOWNLOAD_ASSETS = {
       windows: name => /_x64-setup\.exe$/i.test(name) || /_x64_en-US\.msi$/i.test(name),
       macos: name => /\.dmg$/i.test(name),
