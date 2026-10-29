@@ -15,7 +15,6 @@
       :root {
         --bg: #0f0705;
         --panel: rgba(31, 18, 13, 0.88);
-        --panel-strong: rgba(14, 7, 5, 0.76);
         --ink: #fff5dc;
         --muted: #d9c6a1;
         --gold: #f0a000;
@@ -38,8 +37,7 @@
       body {
         min-height: 100vh;
         background:
-          linear-gradient(90deg, rgba(15, 7, 5, 0.96), rgba(15, 7, 5, 0.78) 42%, rgba(15, 7, 5, 0.2)),
-          url("../assets/auth-confirmed-success.png") center / cover no-repeat,
+          radial-gradient(ellipse at top right, rgba(240, 160, 0, 0.1), transparent 65%),
           var(--bg);
         color: var(--ink);
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -51,12 +49,29 @@
 
       .page {
         display: grid;
+        grid-template-columns: minmax(18rem, 30rem) minmax(0, 1fr);
+        grid-template-areas: "content artwork";
+        align-items: center;
+        gap: clamp(1.25rem, 3vw, 3rem);
         min-height: 100vh;
-        padding: clamp(1rem, 4vw, 3rem);
-        place-items: center start;
+        max-width: 120rem;
+        margin: 0 auto;
+        padding: clamp(1rem, 3vw, 3rem);
+      }
+
+      .artwork {
+        grid-area: artwork;
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: calc(100vh - 6rem);
+        object-fit: contain;
+        border-radius: 0.5rem;
       }
 
       .card {
+        grid-area: content;
+        justify-self: center;
         width: min(100%, 34rem);
         padding: clamp(1.25rem, 4vw, 2rem);
         border: 1px solid var(--rule);
@@ -65,7 +80,6 @@
           linear-gradient(180deg, rgba(255, 211, 90, 0.08), transparent 38%),
           var(--panel);
         box-shadow: 0 1.5rem 4rem var(--shadow);
-        backdrop-filter: blur(12px);
       }
 
       .mark {
@@ -144,29 +158,22 @@
         color: var(--danger);
       }
 
-      @media (max-width: 760px) {
-        body {
-          background:
-            linear-gradient(180deg, rgba(15, 7, 5, 0.2), rgba(15, 7, 5, 0.96) 48%),
-            url("../assets/auth-confirmed-success.png") center top / contain no-repeat,
-            var(--bg);
-        }
-
+      @media (max-width: 960px) {
         .page {
+          grid-template-columns: minmax(0, 1fr);
+          grid-template-areas: "artwork" "content";
           min-height: auto;
-          align-items: start;
-          /* Leave room for the 4:3 illustration above the card. */
-          padding-top: calc(75vw + 1rem);
         }
 
-        .card {
-          width: 100%;
+        .artwork {
+          max-height: none;
         }
       }
     </style>
   </head>
   <body data-state="ready">
     <main class="page">
+      <img class="artwork" src="../assets/auth-confirmed-success.png" width="1448" height="1086" alt="">
       <section class="card" aria-live="polite">
         <a class="mark" href="../" aria-label="PathMaid home">
           <img src="../assets/pathmaid-icon-128.png" alt="">
