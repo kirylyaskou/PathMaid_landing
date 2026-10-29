@@ -99,9 +99,10 @@
       h1 {
         margin: 0;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(2.5rem, 11vw, 5.5rem);
-        line-height: 0.9;
+        font-size: clamp(2.25rem, 6vw, 3.5rem);
+        line-height: 1.05;
         letter-spacing: 0;
+        overflow-wrap: anywhere;
       }
 
       .lead {
@@ -152,8 +153,10 @@
         }
 
         .page {
-          align-items: end;
-          padding-top: 48vw;
+          min-height: auto;
+          align-items: start;
+          /* Leave room for the 4:3 illustration above the card. */
+          padding-top: calc(75vw + 1rem);
         }
 
         .card {
