@@ -6,9 +6,10 @@
     <meta name="robots" content="noindex">
     <meta
       name="description"
-      content="PathMaid email confirmation result."
+      content="Return to PathMaid after connecting Google Drive."
     >
-    <title>PathMaid - Email confirmed</title>
+    <meta name="referrer" content="no-referrer">
+    <title>PathMaid — Google sign-in</title>
     <link rel="icon" type="image/png" sizes="128x128" href="../assets/pathmaid-icon-128.png">
     <style>
       :root {
@@ -111,71 +112,31 @@
         line-height: 1.6;
       }
 
-      .steps {
-        display: grid;
-        gap: 0.75rem;
-        margin: 1.5rem 0 0;
-        padding: 1rem;
-        border: 1px solid var(--rule);
+      .return-button {
+        display: inline-flex;
+        margin-top: 1.5rem;
+        padding: 0.9rem 1.25rem;
+        border: 1px solid var(--gold-bright);
         border-radius: 0.375rem;
-        background: var(--panel-strong);
-      }
-
-      .step {
-        display: flex;
-        gap: 0.75rem;
-        align-items: flex-start;
-        color: var(--muted);
-        line-height: 1.45;
-      }
-
-      .step strong {
-        color: var(--ink);
-      }
-
-      .step-number {
-        display: grid;
-        flex: 0 0 1.5rem;
-        width: 1.5rem;
-        height: 1.5rem;
-        place-items: center;
-        border-radius: 999px;
         background: var(--gold);
         color: #180b04;
-        font-size: 0.8rem;
-        font-weight: 900;
+        font-weight: 800;
+        text-decoration: none;
       }
 
-      .error-panel {
-        display: none;
+      .return-button:hover {
+        background: var(--gold-bright);
       }
 
-      .error-message {
-        margin-top: 1rem;
-        padding: 0.9rem 1rem;
-        border: 1px solid rgba(255, 123, 93, 0.45);
-        border-radius: 0.375rem;
-        background: rgba(79, 22, 12, 0.54);
-        color: #ffd6cc;
-        font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-        font-size: 0.88rem;
+      .return-button:focus-visible {
+        outline: 3px solid var(--ink);
+        outline-offset: 4px;
+      }
+
+      .return-hint {
+        color: var(--muted);
+        font-size: 0.9rem;
         line-height: 1.5;
-        overflow-wrap: anywhere;
-      }
-
-      body[data-state="error"] {
-        background:
-          linear-gradient(90deg, rgba(15, 7, 5, 0.98), rgba(15, 7, 5, 0.88) 48%, rgba(15, 7, 5, 0.44)),
-          url("../assets/auth-confirmed-success.png") center / cover no-repeat,
-          var(--bg);
-      }
-
-      body[data-state="error"] .success-panel {
-        display: none;
-      }
-
-      body[data-state="error"] .error-panel {
-        display: block;
       }
 
       body[data-state="error"] .eyebrow {
@@ -201,57 +162,47 @@
       }
     </style>
   </head>
-  <body data-state="success">
+  <body data-state="ready">
     <main class="page">
       <section class="card" aria-live="polite">
         <a class="mark" href="../" aria-label="PathMaid home">
           <img src="../assets/pathmaid-icon-128.png" alt="">
           <span>PathMaid</span>
         </a>
-
-        <div class="success-panel">
-          <p class="eyebrow">Great success</p>
-          <h1>Email confirmed.</h1>
-          <p class="lead">
-            Your PathMaid account is ready. Open the PathMaid app, sign in with this email and password,
-            and cloud sync can take it from there.
-          </p>
-          <div class="steps" aria-label="Next steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <span><strong>Return to PathMaid.</strong> Keep this browser tab closed or leave it here as a tiny victory lap.</span>
-            </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <span><strong>Sign in manually.</strong> The confirmation page does not auto-login, so it works from any browser or device.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="error-panel">
-          <p class="eyebrow">Confirmation failed</p>
-          <h1>Link problem.</h1>
-          <p class="lead">
-            Supabase could not confirm this email link. Try opening the newest confirmation email,
-            then return to PathMaid and sign in.
-          </p>
-          <div id="error-message" class="error-message">
-            No backend details were provided.
-          </div>
-        </div>
+        <p id="status-label" class="eyebrow">Google Drive</p>
+        <h1 id="status-title">Return to PathMaid.</h1>
+        <p id="status-description" class="lead">Finish connecting Google in the app. Use the button below to return to PathMaid.</p>
+        <a id="return-button" class="return-button" href="pathmaid://open">Open PathMaid</a>
+        <p id="return-hint" class="return-hint">Your browser may ask permission to open the app. If nothing happens, switch back to PathMaid manually.</p>
       </section>
     </main>
-
     <script>
       const params = new URLSearchParams(window.location.search)
-      const hash = window.location.hash.startsWith('#') ? window.location.hash.slice(1) : window.location.hash
-      const hashParams = new URLSearchParams(hash)
-      hashParams.forEach((value, key) => params.set(key, value))
-
-      const error = params.get('error_description') || params.get('error_code') || params.get('error')
-      if (error) {
-        document.body.dataset.state = 'error'
-        document.getElementById('error-message').textContent = error
+      const status = params.get('status')
+      const state = status === 'success' || status === 'error' ? status : 'ready'
+      window.history.replaceState(null, '', window.location.pathname)
+      document.body.dataset.state = state
+      const russian = navigator.language.toLowerCase().startsWith('ru')
+      document.documentElement.lang = russian ? 'ru' : 'en'
+      const text = russian ? {
+        ready: ['Вернуться в PathMaid.', 'Завершите подключение Google в приложении. Нажмите кнопку ниже, чтобы вернуться в PathMaid.'],
+        success: ['Google Drive подключён.', 'Подключение сохранено. Вернитесь в PathMaid, чтобы сохранить архив или восстановить его из Google Drive.'],
+        error: ['Вход не завершён.', 'Вернитесь в PathMaid, проверьте сообщение и попробуйте подключить Google ещё раз.'],
+        button: 'Открыть PathMaid',
+        hint: 'Браузер может запросить разрешение на открытие приложения. Если ничего не произошло, вернитесь в PathMaid вручную.'
+      } : {
+        ready: ['Return to PathMaid.', 'Finish connecting Google in the app. Use the button below to return to PathMaid.'],
+        success: ['Google Drive connected.', 'Your connection is saved. Return to PathMaid to save or restore ZIP archives in Google Drive.'],
+        error: ['Sign-in was not completed.', 'Return to PathMaid, check the message, and try connecting Google again.'],
+        button: 'Open PathMaid',
+        hint: 'Your browser may ask permission to open the app. If nothing happens, switch back to PathMaid manually.'
+      }
+      document.getElementById('status-title').textContent = text[state][0]
+      document.getElementById('status-description').textContent = text[state][1]
+      document.getElementById('return-button').textContent = text.button
+      document.getElementById('return-hint').textContent = text.hint
+      if (state === 'success') {
+        window.setTimeout(() => window.location.assign('pathmaid://open'), 500)
       }
     </script>
   </body>
