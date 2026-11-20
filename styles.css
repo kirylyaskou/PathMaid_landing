@@ -62,6 +62,11 @@
     .service-art img { width:100%; height:auto; aspect-ratio:4/3; object-fit:contain; }
     .service-art figcaption,.reference-showcase figcaption,.combat-showcase figcaption,.campaign-showcase figcaption,.monster-showcase figcaption { display:flex; justify-content:space-between; gap:1rem; margin-top:1.5rem; padding-top:1rem; border-top:1px solid color-mix(in srgb,currentColor 25%,transparent); font-size:.7rem; font-weight:550; text-transform:uppercase; letter-spacing:.04em; line-height:1.4; }
     .service-art figcaption span:last-child,.reference-showcase figcaption span:last-child,.combat-showcase figcaption span:last-child,.campaign-showcase figcaption span:last-child,.monster-showcase figcaption span:last-child { white-space:nowrap; }
+    .mobile-story { background:var(--rose); }
+    .mobile-story h2 { max-width:13ch; margin:1.3rem 0 1.25rem; color:var(--berry); font-size:clamp(2.55rem,5.2vw,5.8rem); font-weight:800; line-height:1; letter-spacing:-.06em; }
+    .mobile-story .primary-link { margin-top:1.6rem; }
+    .mobile-art { width:100%; max-width:35rem; justify-self:center; border:1px solid var(--ink); box-shadow:8px 8px 0 var(--berry); }
+    .mobile-art img { width:100%; height:auto; }
     .reference-story { background:var(--berry); color:var(--paper); }
     .reference-story .service-layout { grid-template-columns:1fr; gap:3rem; }
     .reference-story .service-copy { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:5vw; }
