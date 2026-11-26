@@ -23,13 +23,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=pathmaid-m">
+  <link rel="stylesheet" href="./styles.css?v=role-switch">
 </head>
 <body>
   <a class="skip" href="#main">Перейти к содержимому</a>
   <header class="page-nav">
-    <a class="wordmark" href="#home" aria-label="PathMaid — на главную">pathmaid<span>.</span></a>
-    <div class="nav-actions"><nav class="language-switcher" aria-label="Язык"><a href="./" aria-current="page">RU</a><a href="./en/" lang="en">EN</a></nav><a class="nav-download" href="#download">Забрать мейду <span aria-hidden="true">↗</span></a></div>
+    <a class="wordmark" href="#home" aria-label="Pathmaid — на главную">Pathmaid<span>.</span></a>
+    <nav class="role-switch" aria-label="Ваша роль">
+      <a href="#home" aria-current="page">Мастеру</a>
+      <a href="./player/">Игроку</a>
+    </nav>
+    <div class="nav-actions">
+      <nav class="language-switcher" aria-label="Язык"><a href="./" aria-current="page">RU</a><a href="./en/" lang="en">EN</a></nav>
+      <a class="nav-download" href="#download">Скачать <span aria-hidden="true">↗</span></a>
+    </div>
   </header>
   <main id="main">
     <section class="hero" id="home" aria-labelledby="hero-title">
@@ -52,7 +59,7 @@
     <section class="service-story mobile-story" id="pathmaid-m" aria-labelledby="pathmaid-m-title">
       <div class="service-layout">
         <div class="service-copy" data-reveal>
-          <p class="chapter">PathMaid M для Android</p>
+          <p class="chapter">Pathmaid для Android</p>
           <h2 id="pathmaid-m-title">В городе<br>новый шериф.</h2>
           <p>Pathbuilder, подвинься. Тилта вышла на смену. Собирай героев Pathfinder 2e, импортируй готовых персонажей и бросай кубики прямо с телефона.</p>
           <a class="primary-link" href="https://github.com/kirylyaskou/PathMaid_releases/releases/download/pathmaid-m-v0.1.1/PathMaid-M-0.1.1-arm64-v8a.apk">Скачать APK 0.1.1 · ARM64 <span aria-hidden="true">↗</span></a>
